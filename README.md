@@ -19,7 +19,7 @@ $root = $merkle->root($data);
 
 
 echo "Merkle root: $root\n";
-echo "Verifica Merkle root: " . ($merkle->verify($data, $root) ? 'SUCCESSO' : 'FALLITO'] . "\n";
+echo "Verifica Merkle root: " . ($merkle->verify($data, $root) ? 'SUCCESSO' : 'FALLITO') . "\n";
 ```
 
 Nell'esempio, il metodo `root` viene utilizzata per calcolare il Merkle Root a partire dalla lista di dati 'abc', 'cde', 'efg', 'jki', 'lmn', e viene stampato il risultato.
