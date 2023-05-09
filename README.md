@@ -2,7 +2,15 @@
 Merkle Root Calculator per php
 
 
-## Usage
+- Clona il software o scaricalo in una cartella sul tuo pc.
+- Copia i file del Qldb e della Blockchain sotto la stessa cartella.
+- Esegui il comando seguente:
+
+```bash
+php index.php
+```
+
+## Esempio
 
 ```php
 require __DIR__ . '/src/MerkleRoot.php';
