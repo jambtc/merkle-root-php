@@ -1,35 +1,36 @@
 # merkle-root-php
 Merkle Root Calculator per php
 
+## Informazioni
+Il presente software effettua il Merkle Root di una serie di hash e ne confronta il contenuto con un Merkle Root fornito.
 
-- Clona il software o scaricalo in una cartella sul tuo pc.
-- Copia i file del Qldb e della Blockchain sotto la stessa cartella.
-- Esegui il comando seguente:
+In particolare permette di confrontare il contenuto presente su QLDB con quello presente su blockchain.
+
+Seguendo questa guida è possibile eseguire in autonomia il predetto controllo.
+
+
+## Prerequisiti
+
+- php
+
+
+## Guida
+
+- Clona questo software oppure scaricalo da questo <a href="https://github.com/jambtc/merkle-root-php/releases/tag/v1.0">link</a> in una cartella sul tuo pc.
+- Copia i file json sia del Qldb che della Blockchain sotto questa stessa cartella.
+- Apri la finestra shell o prompt e digita i seguenti comandi:
 
 ```bash
+cd <nomecartella>
 php index.php
 ```
 
-## Esempio
+Dovresti ottenere una risposta di questo tipo:
 
-```php
-require __DIR__ . '/src/MerkleRoot.php';
+```bash
+Merkle Root Calculator
 
-
-// array di dati
-$data = ['abc', 'cde', 'efg', 'jki', 'lmn'];
-
-// inizializzo la classe
-$merkle = new MerkleRoot();
-
-// genero il Merkle root
-$root = $merkle->root($data);
-
-
-echo "Merkle root: $root\n";
-echo "Verifica Merkle root: " . ($merkle->verify($data, $root) ? 'SUCCESSO' : 'FALLITO') . "\n";
+Merkle root da Blockchain: 36d12cb8e28699290b0cef1ea5a1fadfd2c6bc4afad02633330e86b197b61884
+Merkle root da QLDB: 36d12cb8e28699290b0cef1ea5a1fadfd2c6bc4afad02633330e86b197b61884
+Verifica Merkle root: SUCCESSO
 ```
-
-Nell'esempio, il metodo `root` viene utilizzata per calcolare il Merkle Root a partire dalla lista di dati 'abc', 'cde', 'efg', 'jki', 'lmn', e viene stampato il risultato.
-
-Successivamente, il metodo `verify` viene utilizzata per verificare se i dati 'abc', 'cde', 'efg', 'jki', 'lmn' corrispondono al Merkle Root calcolato e viene stampato il risultato della verifica.
