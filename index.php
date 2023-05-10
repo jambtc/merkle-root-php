@@ -20,7 +20,8 @@ $merkle = new MerkleRoot();
 $root_qldb = $merkle->root($qldb);
 
 echo "Merkle Root Calculator\n\n";
-echo "Merkle root da Blockchain: $data_blockchain->merkle_root\n";
+echo "Hash Transazione: ". $data_blockchain->txHash ."\n";
+echo "Merkle root da Blockchain: $data_blockchain->merkleRoot\n";
 echo "Merkle root da QLDB: $root_qldb\n";
-echo "Verifica Merkle root: " . ($merkle->verify($qldb, $data_blockchain->merkle_root) ? 'SUCCESSO' : 'FALLITO') . "\n";
+echo "Verifica Merkle root: " . ($merkle->verify($qldb, $data_blockchain->merkleRoot) ? 'SUCCESSO' : 'FALLITO') . "\n";
 

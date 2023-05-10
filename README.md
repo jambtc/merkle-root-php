@@ -30,6 +30,7 @@ Dovresti ottenere una risposta di questo tipo:
 ```bash
 Merkle Root Calculator
 
+Hash Transazione: 0x4de4beaf81e16c53537f1369180ab77a803b4251d8a29a6ee937b5f72af8a0c9
 Merkle root da Blockchain: 36d12cb8e28699290b0cef1ea5a1fadfd2c6bc4afad02633330e86b197b61884
 Merkle root da QLDB: 36d12cb8e28699290b0cef1ea5a1fadfd2c6bc4afad02633330e86b197b61884
 Verifica Merkle root: SUCCESSO
