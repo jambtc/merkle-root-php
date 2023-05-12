@@ -6,7 +6,7 @@ Il presente software effettua il Merkle Root di una serie di hash e ne confronta
 
 In particolare permette di confrontare il contenuto presente su QLDB con quello presente su blockchain.
 
-Seguendo questa guida è possibile eseguire in autonomia il predetto controllo.
+Seguendo questa guida è possibile eseguire in autonomia il predetto controllo. 
 
 
 ## Prerequisiti
@@ -16,9 +16,9 @@ Seguendo questa guida è possibile eseguire in autonomia il predetto controllo.
 
 ## Guida
 
-- Clona questo software oppure scaricalo da questo <a href="https://github.com/jambtc/merkle-root-php/releases/tag/v1.0">link</a> in una cartella sul tuo pc.
-- Copia i file json sia del Qldb che della Blockchain sotto questa stessa cartella.
-- Apri la finestra shell o prompt e digita i seguenti comandi:
+- Clona questo software oppure scaricalo da questo <a href="https://github.com/jambtc/merkle-root-php/releases/tag/v1.1">link</a> in una cartella sul tuo pc.
+- Copia i file json sia del Qldb che della Blockchain sotto questa stessa cartella. Nel file `blockchain.json` lascia soltanto il merkle root che vuoi verificare. Nel file `qldb.json` lascia soltanto gli hash relativi al periodo che vuoi verificare. Ricordati di eliminare l'ultima virgola per evitare errori di formattazione del formato json.
+- Apri una finestra shell o prompt e digita i seguenti comandi:
 
 ```bash
 cd <nomecartella>
@@ -30,7 +30,6 @@ Dovresti ottenere una risposta di questo tipo:
 ```bash
 Merkle Root Calculator
 
-Hash Transazione: 0x4de4beaf81e16c53537f1369180ab77a803b4251d8a29a6ee937b5f72af8a0c9
 Merkle root da Blockchain: 36d12cb8e28699290b0cef1ea5a1fadfd2c6bc4afad02633330e86b197b61884
 Merkle root da QLDB: 36d12cb8e28699290b0cef1ea5a1fadfd2c6bc4afad02633330e86b197b61884
 Verifica Merkle root: SUCCESSO

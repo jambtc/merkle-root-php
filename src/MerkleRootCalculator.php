@@ -6,7 +6,7 @@
  * Date: 03.05.2023
  */
 
-class MerkleRoot
+class MerkleRootCalculator
 {
     /**
      * Calcola il Merkle Root

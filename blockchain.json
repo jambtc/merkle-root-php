@@ -1,5 +1,7 @@
-{
-    "merkleRoot": "36d12cb8e28699290b0cef1ea5a1fadfd2c6bc4afad02633330e86b197b61884",
-    "txHash": "0x4de4beaf81e16c53537f1369180ab77a803b4251d8a29a6ee937b5f72af8a0c9",
-    "timestamp": 1683380719
-}
+[
+    {
+        "merkleRoot": "36d12cb8e28699290b0cef1ea5a1fadfd2c6bc4afad02633330e86b197b61884",
+        "txHash": "0x4de4beaf81e16c53537f1369180ab77a803b4251d8a29a6ee937b5f72af8a0c9",
+        "timestamp": 1683380719
+    }
+]
