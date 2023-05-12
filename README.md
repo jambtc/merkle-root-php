@@ -1,5 +1,4 @@
-# merkle-root-php
-Merkle Root Calculator per php
+# Merkle Root Calculator
 
 ## Informazioni
 Il presente software effettua il Merkle Root di una serie di hash e ne confronta il contenuto con un Merkle Root fornito.
