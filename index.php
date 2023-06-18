@@ -1,51 +1,66 @@
 <?php
 
 require __DIR__ . '/src/MerkleRootCalculator.php';
+require __DIR__ . '/func/functions.php';
 
-/**
- * Questa funzione carica un file e ne restituisce il contenuto in formato json
- * 
- * @param string $filename
- * @return json 
- */
-function loadFile($filename){
-    // verifico l'esistenza del file
-    if (file_exists($filename)) {
-        $json = json_decode(file_get_contents($filename));
-    } else {
-        echo "Il file {$filename} non esiste.\n";
-        die();
-    }
-    
-    // verifico se il file è un json
-    if ((json_last_error() === JSON_ERROR_NONE) == false) {
-        echo "Il file {$filename} contiene un errore e non viene riconosciuto.\n";
-        die();
-    }
-    return $json;
-}
 
-/**
- * Inizio della verifica
- */
 echo "Merkle Root Calculator\n\n";
 
+echo "Fai la tua scelta:\n\n";
+echo "   1. Verifica Merkle Root\n";
+echo "   2. Estrai i Merkle Root dal file QLDB\n";
+echo "   3. Estrai i Merkle Root dal file Blockchain\n";
+$scelta = readline();
+
+if ($scelta != '1' && $scelta != '2' && $scelta != '3'){
+    echo "\nScelta non consentita!\n\n";
+    die();
+}
+
 // carico il contenuto dei file json
-$qldb_data = loadFile('qldb.json'); 
-$blockchain_data = loadFile('blockchain.json'); 
+$qldb_json = loadFile('qldb.json'); 
+$blockchain_json = loadFile('blockchain.json');
 
-// genero l'array di hash di qldb
-foreach ($qldb_data as $data) $qldb_hashes[] = $data->document_hash; 
+// Estraggo le informazioni dai file
+$result = verificaMerkleRoot($qldb_json, $blockchain_json);
 
-// prendo solo l'elemento 0 del json della blockchain
-$blockchain_data = $blockchain_data[0]; 
+if ($scelta == '1'){
+    foreach ($result['blockchain_data'] as $period => $merkleRoot) {
+        // Inizializzo la classe e calcolo il Merkle root con gli hash ricavati dal qldb
+        $merkle = new MerkleRootCalculator();
+        $qldb_root = $merkle->root($result['qldb_hashes'][$period]);
 
-// inizializzo la classe e calcolo il Merkle root con gli hash ricavati dal qldb
-$merkle = new MerkleRootCalculator(); 
-$qldb_root = $merkle->root($qldb_hashes); 
+        // stampo il risultato per singolo periodo
+        echo "Periodo: $period\n";
+        echo "Merkle root da Blockchain: $merkleRoot\n";
+        echo "Merkle root da QLDB: $qldb_root\n";
+        echo "Verifica Merkle root: " . ($merkle->verify($result['qldb_hashes'][$period], $merkleRoot) ? 'SUCCESSO' : 'FALLITO') . "\n";
+    }
+    
+    die();
+}
 
-// stampo il risultato
-echo "Merkle root da Blockchain: $blockchain_data->merkleRoot\n";
-echo "Merkle root da QLDB: $qldb_root\n";
-echo "Verifica Merkle root: " . ($merkle->verify($qldb_hashes, $blockchain_data->merkleRoot) ? 'SUCCESSO' : 'FALLITO') . "\n";
+if ($scelta == '2'){
+    foreach ($result['all_qldb_hashes'] as $period => $hashes) {
+        // Inizializzo la classe e calcolo il Merkle root con gli hash ricavati dal qldb
+        $merkle = new MerkleRootCalculator();
+        $qldb_root = $merkle->root($hashes);
 
+        // stampo il risultato per singolo periodo
+        echo "Periodo: $period\n";
+        echo "Merkle root da QLDB: $qldb_root\n";
+    }
+
+    die();
+}
+
+if ($scelta == '3') {
+    foreach ($result['blockchain_data'] as $period => $merkleRoot) {
+        
+        // stampo il risultato per singolo periodo
+        echo "Periodo: $period\n";
+        echo "Merkle root da Blockchain: $merkleRoot\n";
+    }
+
+    die();
+}
