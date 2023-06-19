@@ -84,6 +84,7 @@ function verificaMerkleRoot($qldb_json, $blockchain_json)
             if ($matchDate >= $dateFromPeriod->startDate && $matchDate <= $dateFromPeriod->finishDate) {
                 // se appartiene al periodo la salvo in array
                 $qldb_hashes[$matchDate->format('Y-m')][] = $qldb->document_hash;
+                // $timestamp_qldb_hashes[$qldb->activity_timestamp][] = $qldb->document_hash;
 
                 // salvo anche le informazioni del merkle root della blockchain relative
                 $blockchain_data[$matchDate->format('Y-m')] = $merkleRootByPeriod;
@@ -92,6 +93,12 @@ function verificaMerkleRoot($qldb_json, $blockchain_json)
 
         }
     }
+
+    // echo '<pre>' . print_r($timestamp_qldb_hashes, true) . '</pre>';
+    // asort($timestamp_qldb_hashes);
+    // echo '<pre>' . print_r($timestamp_qldb_hashes, true) . '</pre>';
+
+    // exit;
 
     return [
         'qldb_hashes' => $qldb_hashes,

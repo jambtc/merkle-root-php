@@ -7,12 +7,13 @@ require __DIR__ . '/func/functions.php';
 echo "Merkle Root Calculator\n\n";
 
 echo "Fai la tua scelta:\n\n";
-echo "   1. Verifica Merkle Root\n";
-echo "   2. Estrai i Merkle Root dal file QLDB\n";
-echo "   3. Estrai i Merkle Root dal file Blockchain\n";
+echo "   1. Compara i Merkle Root\n";
+echo "   2. Estrai il Merkle Root dal file QLDB\n";
+echo "   3. Estrai il Merkle Root dal file Blockchain\n";
+echo "   4. Mostra gli hash dei file\n";
 $scelta = readline();
 
-if ($scelta != '1' && $scelta != '2' && $scelta != '3'){
+if ($scelta != '1' && $scelta != '2' && $scelta != '3' && $scelta != '4'){
     echo "\nScelta non consentita!\n\n";
     die();
 }
@@ -23,6 +24,13 @@ $blockchain_json = loadFile('blockchain.json');
 
 // Estraggo le informazioni dai file
 $result = verificaMerkleRoot($qldb_json, $blockchain_json);
+if ($scelta == '4'){
+    unset($result['qldb_hashes']);
+    echo '<pre>' . print_r($result, true) . '</pre>';
+    exit;
+
+}
+
 
 if ($scelta == '1'){
     foreach ($result['blockchain_data'] as $period => $merkleRoot) {
@@ -31,7 +39,7 @@ if ($scelta == '1'){
         $qldb_root = $merkle->root($result['qldb_hashes'][$period]);
 
         // stampo il risultato per singolo periodo
-        echo "Periodo: $period\n";
+        echo "\nPeriodo: $period\n";
         echo "Merkle root da Blockchain: $merkleRoot\n";
         echo "Merkle root da QLDB: $qldb_root\n";
         echo "Verifica Merkle root: " . ($merkle->verify($result['qldb_hashes'][$period], $merkleRoot) ? 'SUCCESSO' : 'FALLITO') . "\n";
@@ -47,7 +55,7 @@ if ($scelta == '2'){
         $qldb_root = $merkle->root($hashes);
 
         // stampo il risultato per singolo periodo
-        echo "Periodo: $period\n";
+        echo "\nPeriodo: $period\n";
         echo "Merkle root da QLDB: $qldb_root\n";
     }
 
@@ -58,7 +66,7 @@ if ($scelta == '3') {
     foreach ($result['blockchain_data'] as $period => $merkleRoot) {
         
         // stampo il risultato per singolo periodo
-        echo "Periodo: $period\n";
+        echo "\nPeriodo: $period\n";
         echo "Merkle root da Blockchain: $merkleRoot\n";
     }
 
