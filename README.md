@@ -63,4 +63,4 @@ E' necessario però modificare manualmente il contenuto dell'array `$data`, con 
 ## Verifica online in python
 
 E' possibile anche usare uno script in python che funziona allo stesso modo.
-Legge l'array elements e ne produce il merkle root. Il file da usare, in questo caso, è `online.py`
+Legge l'array elements e ne produce il merkle root. Il file da usare, in questo caso, è `online.py` e il sito online di test è: <https://www.programiz.com/python-programming/online-compiler/>
