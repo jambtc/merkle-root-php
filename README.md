@@ -19,7 +19,11 @@ corrisponda a quello salvato in blockchain.
 
 ## Prerequisiti
 
-- php
+- php 
+
+### Installazione di php
+
+Il modo più semplice di installare php è quello di scaricare xampp dal sito <https://www.apachefriends.org/it/download.html>
 
 
 ## Guida
