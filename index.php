@@ -19,16 +19,16 @@ if ($scelta != '1' && $scelta != '2' && $scelta != '3' && $scelta != '4'){
 }
 
 // carico il contenuto dei file json
-$qldb_json = loadFile('qldb.json'); 
+$qldb_json = loadFile('qldb.json');
 $blockchain_json = loadFile('blockchain.json');
 
 // Estraggo le informazioni dai file
 $result = verificaMerkleRoot($qldb_json, $blockchain_json);
 if ($scelta == '4'){
-    unset($result['qldb_hashes']);
+    unset($result['all_qldb_hashes']);
     echo '<pre>' . print_r($result, true) . '</pre>';
-    exit;
 
+    die();
 }
 
 
@@ -63,8 +63,21 @@ if ($scelta == '2'){
 }
 
 if ($scelta == '3') {
+    echo "Merkle root estratto da blockchain.json:";
+    $blockchainResults = (array) $blockchain_json->json_results;
+
+    // genero l'array con i merkle root dalla blockchain suddivisi per anno/mese
+    foreach ($blockchainResults as $period => $merkleRootByPeriod) {
+        // funzione che estrae date dal period salvato su blockchain
+        $dateFromPeriod = dateFromPeriod($period);
+
+        // stampo il risultato per singolo periodo
+        echo "\nPeriodo: " . $dateFromPeriod->startDate->format('Y-m') . "\n";
+        echo "Merkle root da file: $merkleRootByPeriod\n";
+    }
+
+    echo "\nMerkle root calcolato da file:";
     foreach ($result['blockchain_data'] as $period => $merkleRoot) {
-        
         // stampo il risultato per singolo periodo
         echo "\nPeriodo: $period\n";
         echo "Merkle root da Blockchain: $merkleRoot\n";

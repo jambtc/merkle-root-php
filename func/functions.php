@@ -40,14 +40,9 @@ function loadFile($filename)
  */
 function dateFromPeriod($period){
     $dates = explode('__', $period);
-    // echo '<pre>' . print_r($dates, true) . '</pre>';
-    // exit;
 
     $startDate = \DateTime::createFromFormat('d-m-Y H:i:s', $dates[0] . ' 00:00:00');
     $finishDate = \DateTime::createFromFormat('d-m-Y H:i:s', $dates[1] . ' 23:59:59');
-    // echo '<pre>' . print_r($startDate, true) . '</pre>';
-    // echo '<pre>' . print_r($finishDate, true) . '</pre>';
-    // exit;
 
     $result = new \stdClass;
     $result->startDate = $startDate;
@@ -64,9 +59,10 @@ function dateFromPeriod($period){
  */
 function verificaMerkleRoot($qldb_json, $blockchain_json)
 {
+    $qldb_hashes = [];
+    $blockchain_data = [];
+
     $blockchainResults = (array) $blockchain_json->json_results;
-    // echo '<pre>' . print_r($blockchainResults, true) . '</pre>';
-    // exit;
 
     // genero l'array con i merkle root dalla blockchain suddivisi per anno/mese
     foreach ($blockchainResults as $period => $merkleRootByPeriod) {
@@ -93,12 +89,6 @@ function verificaMerkleRoot($qldb_json, $blockchain_json)
 
         }
     }
-
-    // echo '<pre>' . print_r($timestamp_qldb_hashes, true) . '</pre>';
-    // asort($timestamp_qldb_hashes);
-    // echo '<pre>' . print_r($timestamp_qldb_hashes, true) . '</pre>';
-
-    // exit;
 
     return [
         'qldb_hashes' => $qldb_hashes,
